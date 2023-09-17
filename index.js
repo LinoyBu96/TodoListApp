@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 const app = express();
-const port = 5000;
+const port = 7000;
 const activeStatus= "active"
 app.use(express.static("public"));
 
