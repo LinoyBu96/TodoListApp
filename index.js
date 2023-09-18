@@ -41,7 +41,7 @@ function get_active_data(isActive) {
 
 app.get("/", (req, res) => {
   const data = get_active_data("home");
-  res.render("index.ejs", data);
+  res.render("home.ejs", data);
 });
 
 app.get('/shopping', (req, res) => {

@@ -1,9 +1,17 @@
 
-
+#content {
+  width: 100%;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
 
 main {
   position: absolute;
   top: 60px !important;
+  padding-right: 0px !important;
 }
 
 #sidebar {
@@ -16,5 +24,5 @@ main {
 }
 
 footer > div {
-  clear: left;
+  position: static;
 }
