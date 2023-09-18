@@ -8,6 +8,8 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var shoppingData = [{task: "task 1", note:"note 1"}, {task: "task 2", note:"note 2"}];
+
 function get_active_data(isActive) {
   var home = "link-body-emphasis";
   var shopping = "link-body-emphasis";
@@ -45,7 +47,9 @@ app.get("/", (req, res) => {
 });
 
 app.get('/shopping', (req, res) => {
+  console.log(shoppingData[0].task);
   const data = get_active_data("shopping");
+  data.shoppingData = shoppingData;
   res.render("shopping.ejs", data);
 });
 
@@ -57,6 +61,16 @@ app.get('/study', (req, res) => {
 app.get('/job', (req, res) => {
   const data = get_active_data("job");
   res.render("job.ejs", data);
+});
+
+app.post('/shopping', (req, res) => {
+  const data = get_active_data("shopping");
+  // var userTask = req.body["task"];
+  // data.newTask = userTask;
+  const newTask = {task: req.body["task"], note: req.body["note"]};
+  shoppingData.push(newTask);
+  data.shoppingData = shoppingData;
+  res.render("shopping.ejs", data);
 });
 
 app.listen(port, () => {

@@ -4,7 +4,8 @@
 <!-- Content -->
 <div id="content" class="content mt-4 bg-body p-5 w-100 h-80">
   <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
-    <div class="list-group  w-100">
+    <div class="list-group col-md-8 col-12">
+
       <label class="list-group-item d-flex gap-3">
         <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="" style="font-size: 1.375em;">
         <span class="pt-1 form-checked-content">
@@ -28,25 +29,54 @@
       <label class="list-group-item d-flex gap-3">
         <input class="form-check-input flex-shrink-0" type="checkbox" value="" style="font-size: 1.375em;">
         <span class="pt-1 form-checked-content">
-          <strong>Out of office</strong>
+          <strong>dddddddddddddddd
+            dddddddddddddddddddddd
+            dddddddddddddd
+            dddddddddddddddddd
+            dddddddddddddddddddd
+            ddddddddddddddd
+            ddddddddddddddddddd
+            dddddddddd
+            dddddddddddddd
+            dddddddddddddd
+            dddddddddddddddddddd
+            ddddddddddddddd
+            ddddddddddddd
+            dddddddddddddd
+            dddddddddddddd
+            ddddddddddddd
+            ddddddddddd</strong>
           <small class="d-block text-body-secondary">
             <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#alarm"></use></svg>
-            Tomorrow
+            <div class="note">noted</div>
           </small>
         </span>
       </label>
+      <% for (let i = 0; i < shoppingData.length; i++) { %>
+        <% const newTask = shoppingData[i].task; %>
+        <% const newNote = shoppingData[i].note; %>
+        <%- include("partials/task.ejs", {task: newTask, note: newNote}) %>
+      <% } %>      
+      <form action="/shopping" method="post">
       <label class="list-group-item d-flex gap-3 bg-body-tertiary">
-        <input class="form-check-input form-check-input-placeholder bg-body-tertiary flex-shrink-0 pe-none" disabled="" type="checkbox" value="" style="font-size: 1.375em;">
-        <span class="pt-1 form-checked-content">
-          <span contenteditable="true" class="w-100">Add new task...</span>
+        <span class="pt-1 form-checked-content w-100">
+          <input contenteditable="true" class="w-100 m-2 form-control" type="text" name="task" placeholder="Enter a new task..." required>
+          <!-- <span contenteditable="true" class="w-100">Add new task...</span> -->
           <small class="d-block text-body-secondary">
-            <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#list-check"></use></svg>
-            Choose list...
+            <!-- <input contenteditable="true" class="w-50 form-control" type="text" name="newNote" placeholder="Notes"> -->
+            <textarea rows="2" cols="60" class="w-100 m-2 form-control" name="note" placeholder="Notes"></textarea>
           </small>
         </span>
+        <button class="w-10 btn btn-primary btn-lg" type="submit" fdprocessedid="v1yo4">Add task</button>
       </label>
+    </form>
     </div>
   </div>
+  <% if (locals.newTask) { %>
+    <h1>your name length is: <%= newTask %></h1>
+  <% } else { %>
+    <h1>Enter your name below:</h1>
+  <% } %>
 <%- include("partials/footer.ejs") %>
             
       
