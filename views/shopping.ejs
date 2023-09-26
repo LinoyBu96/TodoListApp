@@ -52,11 +52,15 @@
           </small>
         </span>
       </label>
+
       <% for (let i = 0; i < shoppingData.length; i++) { %>
         <% const newTask = shoppingData[i].task; %>
         <% const newNote = shoppingData[i].note; %>
-        <%- include("partials/task.ejs", {task: newTask, note: newNote}) %>
-      <% } %>      
+        <% const newChecked = shoppingData[i].checked; %>
+        
+        <%- include("partials/task.ejs", {task: newTask, note: newNote, checked:newChecked, index: i}) %>
+      <% } %>    
+      
       <form action="/shopping" method="post">
       <label class="list-group-item d-flex gap-3 bg-body-tertiary">
         <span class="pt-1 form-checked-content w-100">

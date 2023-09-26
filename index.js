@@ -8,7 +8,7 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var shoppingData = [{task: "task 1", note:"note 1"}, {task: "task 2", note:"note 2"}];
+var shoppingData = [{task: "task 1", note:"note 1", checked: ""}, {task: "task 2", note:"note 2", checked: "checked"}];
 
 function get_active_data(isActive) {
   var home = "link-body-emphasis";
@@ -38,7 +38,7 @@ function get_active_data(isActive) {
     studyStatus: study,
     jobStatus: job};
   
-  res.render(__dirname + "/views/index.ejs", data);
+  // res.render(__dirname + "/views/index.ejs", data);
 }
 
 app.get("/", (req, res) => {
@@ -64,15 +64,54 @@ app.get('/job', (req, res) => {
 });
 
 app.post('/shopping', (req, res) => {
+  console.log("post-shopping");
   const data = get_active_data("shopping");
   // var userTask = req.body["task"];
   // data.newTask = userTask;
-  const newTask = {task: req.body["task"], note: req.body["note"]};
+  const newTask = {task: req.body["task"], note: req.body["note"], checked: ""};
   shoppingData.push(newTask);
   data.shoppingData = shoppingData;
   res.render("shopping.ejs", data);
 });
 
+
+app.post('/shopping/checkbox', (req, res) => {
+  console.log("post-shopping/checkbox");
+  const i = req.body["number"];
+  const oldVal = shoppingData[i]["checked"];
+  var newVal = "";
+  if (oldVal == "") {
+    newVal = "checked"
+  }
+  shoppingData[i]["checked"] = newVal;
+  res.redirect("/shopping");
+});
+
+
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+
+
+
+// const checkbox = $("[type=checkbox]")
+
+// checkbox.addEventListener('change', (event) => {
+//   if (event.currentTarget.checked) {
+//     alert('checked');
+//   } else {
+//     alert('not checked');
+//   }
+// })
+
+// function updateH1(checkbox) {
+//   // var h1 = document.getElementById('status');
+//   if (checkbox.checked) {
+//       console.log("on");
+//   } else {
+//     console.log("off");
+//   }
+// }
+
